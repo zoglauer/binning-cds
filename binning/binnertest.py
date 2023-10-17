@@ -1,4 +1,4 @@
-def binnertest(df,colnames=['theta','phi','scatterangle'],n,epsilon):
+def binnertest(df,n,epsilon,colnames=['theta','phi','scatterangle']):
 
   def unevenbins(df, colname, n, epsilon):
     itemsPerBin = len(df)/n
