@@ -58,22 +58,22 @@ def binnertest(df,colnames=['theta','phi','scatterangle'],n,epsilon):
     return bins,binslist,itemslist
 
   def assigntodf(outputfromunevenbins,df,col):
-  maxangle=180
-  upperbounds=outputfromunevenbins[1]
-  points_in_group=outputfromunevenbins[2]
-  newlst = [None]*len(df) #pd.DataFrame({'a':[None]*len(df)})
-  for i in np.arange(len(points_in_group)):
+    maxangle=180
+    upperbounds=outputfromunevenbins[1]
+    points_in_group=outputfromunevenbins[2]
+    newlst = [None]*len(df) #pd.DataFrame({'a':[None]*len(df)})
+    for i in np.arange(len(points_in_group)):
     #points_in_group[i][f'{col} bin']=upperbounds[i+1]
     
-    if i == len(points_in_group)-1: #last box
-      bound=maxangle
-    else:
-      bound= upperbounds[i+1]
-    for j in points_in_group[i].index:
-      newlst[j]= bound
+      if i == len(points_in_group)-1: #last box
+        bound=maxangle
+      else:
+        bound= upperbounds[i+1]
+      for j in points_in_group[i].index:
+        newlst[j]= bound
     #newlst.iloc[points_in_group.index]['a']=upperbounds[i+1]
-  df[f'{col} bin'] = newlst
-  return df
+    df[f'{col} bin'] = newlst
+    return df
 
   thetabins= unevenbins(df, 'theta', n, epsilon)
   phibins=unevenbins(df, 'phi', n, epsilon)
