@@ -125,13 +125,12 @@ class Binner():
             newlst = [None]*len(df) #pd.DataFrame({'a':[None]*len(df)})
             for i in np.arange(len(points_in_group)):
             #points_in_group[i][f'{col} bin']=upperbounds[i+1]
-            
-            if i == len(points_in_group)-1: #last box
-                bound=maxangle
-            else:
-                bound= upperbounds[i+1]
-            for j in points_in_group[i].index:
-                newlst[j]= bound
+                if i == len(points_in_group)-1: #last box
+                    bound=maxangle
+                else:
+                    bound= upperbounds[i+1]
+                for j in points_in_group[i].index:
+                    newlst[j]= bound
             #newlst.iloc[points_in_group.index]['a']=upperbounds[i+1]
             df[f'{col} bin'] = newlst
             return df
