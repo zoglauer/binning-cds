@@ -20,7 +20,7 @@ class Binner():
  
     def filesplit(self, filepath = "/volumes/selene/users/andreas/simulationScript/Output/TestSource.926.inc1.id1.tra.gz.pkl"):
         fil = open(filepath, "rb")
-        unpickled = pickle.load(fil)
+        # unpickled = pickle.load(fil)
         
         stuff = pickle.load(fil)
         arr = np.array(stuff)
