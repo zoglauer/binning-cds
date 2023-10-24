@@ -4,20 +4,21 @@ import numpy as np
 import pickle
 
 class Binner():
-    def __init__(self, dataFile):
-        ending = os.path.splitext(dataFile)[-1].lower()
-        print(dataFile)
-        if ending == ".pkl":
-            self.df = pd.read_pickle(dataFile)
-        else:
-            self.df = pd.read_csv(dataFile)
+    def __init__(self):
+        self.x = 0
+        # ending = os.path.splitext(dataFile)[-1].lower()
+        # print(dataFile)
+        # if ending == ".pkl":
+        #     self.df = pd.read_pickle(dataFile)
+        # else:
+        #     self.df = pd.read_csv(dataFile)
     # def bin(binStyle):
         # test different binning methods - papers (+ references like qubo), ML based - train on simulation data, train with cone, physics based, occupancy based
     # def binID(self, phi, chi, psi):
     # def binValue(self, binID):
     # def binValue(self, phi, chi, psi):
  
-    def filesplit(filepath = "/volumes/selene/users/andreas/simulationScript/Output/TestSource.926.inc1.id1.tra.gz.pkl"):
+    def filesplit(self, filepath = "/volumes/selene/users/andreas/simulationScript/Output/TestSource.926.inc1.id1.tra.gz.pkl"):
         fil = open(filepath, "rb")
         unpickled = pickle.load(fil)
         
@@ -58,7 +59,7 @@ class Binner():
             )
         return df
     
-    def binnertest(df,n,epsilon,colnames=['theta','phi','scatterangle']):
+    def binnertest(self, df,n,epsilon,colnames=['theta','phi','scatterangle']):
 
         def unevenbins(df, colname, n, epsilon):
             itemsPerBin = len(df)/n
