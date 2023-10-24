@@ -82,6 +82,7 @@ class Binner():
                 initialcurrSize=360/n
             iters = 0
             currSize=initialcurrSize
+            fullname = {'theta':'Theta (Polar Angle)','phi': 'Phi (Azimuthal)','scatterangle':'Scatter Angle'}
             while keepGoing: # bin width should start at 180/n, but starting point will be different as going across the bins.
                 actualItems= df[prev < df[fullname[colname]]][df[fullname[colname]] < (prev + currSize)]
                 thisbinItems = len(actualItems)
