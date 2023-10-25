@@ -5,23 +5,16 @@ import pickle
 
 class Binner():
     def __init__(self, dataFile):
-        print("lol")
         ending = os.path.splitext(dataFile)[-1].lower()
         if ending == ".pkl":
-            print("twas a pickle")
-            self.df = pd.read_pickle(dataFile)
+            self.lst = pd.read_pickle(dataFile)
         else:
-            print("not")
-            self.df = pd.read_csv(dataFile)
-        print("done")
-        print(len(self.df[0]))
-        print(len(self.df[1]))
-        print(len(self.df[2]))
-        print(len(self.df[3]))
-        print(len(self.df[4]))
-        print(len(self.df[5]))
-        # print(self.df.head(5))
-        print("done2")
+            self.lst = pd.read_csv(dataFile)
+        self.filesplit()
+
+    def listSplit(self):
+        print(self.lst[0][0])
+        # print(self.lst.T.head())
  
     # def filesplit(self):
     #     df = pd.DataFrame(arr)
