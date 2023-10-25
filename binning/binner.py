@@ -8,11 +8,13 @@ class Binner():
         print("lol")
         ending = os.path.splitext(dataFile)[-1].lower()
         if ending == ".pkl":
+            print("twas a pickle")
             self.df = pd.read_pickle(dataFile)
         else:
+            print("not")
             self.df = pd.read_csv(dataFile)
         print("done")
-        print(self.df.head())
+        print(self.df.head(5))
         print("done2")
  
     # def filesplit(self):
