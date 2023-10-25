@@ -12,7 +12,7 @@ class Binner():
         else:
             self.df = pd.read_csv(dataFile)
         print("done")
-        print(self.df.head)
+        print(self.df.head())
         print("done2")
  
     # def filesplit(self):
