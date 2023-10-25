@@ -5,12 +5,15 @@ import pickle
 
 class Binner():
     def __init__(self, dataFile):
+        print("lol")
         ending = os.path.splitext(dataFile)[-1].lower()
         if ending == ".pkl":
             self.df = pd.read_pickle(dataFile)
         else:
             self.df = pd.read_csv(dataFile)
+        print("done")
         print(self.df.head)
+        print("done2")
  
     # def filesplit(self):
     #     df = pd.DataFrame(arr)
