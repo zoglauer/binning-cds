@@ -13,19 +13,9 @@ class Binner():
         self.listSplit()
 
     def listSplit(self):
-        print(type(self.lst[0][20]))
-        print(self.lst[0][20])
-        print(type(self.lst[1][20]))
-        print(self.lst[1][20])
-        print(type(self.lst[2][20]))
-        print(self.lst[2][20])
-        print(type(self.lst[3][20]))
-        print(self.lst[3][20])
-        print(type(self.lst[4][20]))
-        print(self.lst[4][20])
-        print(type(self.lst[5][20]))
-        print(self.lst[5][20])
-        # print(self.lst.T.head())
+        data = [self.lst[0], self.lst[1], self.lst[2], self.lst[3], self.lst[4], self.lst[5]]
+        self.df = pd.DataFrame(data).T.rename(columns={0: "Event ID", 1: "Energy", 2: "Theta", 3: "Phi", 4: "Scatter Angle", 5: "Path Length"})
+        print(self.df.head())
  
     # def filesplit(self):
     #     df = pd.DataFrame(arr)
