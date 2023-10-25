@@ -2,9 +2,11 @@ import os
 import pandas as pd
 import numpy as np
 import pickle
+import time
 
 class Binner():
     def __init__(self, dataFile):
+        self.start = time.time()
         ending = os.path.splitext(dataFile)[-1].lower()
         if ending == ".pkl":
             self.lst = pd.read_pickle(dataFile)
@@ -16,6 +18,7 @@ class Binner():
         data = [self.lst[0], self.lst[1], self.lst[2], self.lst[3], self.lst[4], self.lst[5]]
         self.df = pd.DataFrame(data).T.rename(columns={0: "Event ID", 1: "Energy", 2: "Theta", 3: "Phi", 4: "Scatter Angle", 5: "Path Length"})
         print(self.df.head())
+        print("Method 1", time.time() - self.start)
  
     # def filesplit(self):
     #     df = pd.DataFrame(arr)
