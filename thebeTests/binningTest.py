@@ -10,7 +10,9 @@ from binner import Binner
 # binny = Binner(testDataFile)
 # print(binny.df)
 
-binny = Binner()
-x = binny.filesplit()
-y = binny.binnertest(x, 20, 20, colnames=['theta','phi','scatterangle'])
-print(y.head())
+filepath = "/volumes/selene/users/andreas/simulationScript/Output/TestSource.926.inc1.id1.tra.gz.pkl"
+binny = Binner(filepath)
+
+# x = binny.filesplit()
+# y = binny.binnertest(x, 20, 20, colnames=['theta','phi','scatterangle'])
+# print(y.head())
