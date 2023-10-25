@@ -15,10 +15,25 @@ class Binner():
         self.listSplit()
 
     def listSplit(self):
-        data = [self.lst[0], self.lst[1], self.lst[2], self.lst[3], self.lst[4], self.lst[5]]
-        self.df = pd.DataFrame(data).T.rename(columns={0: "Event ID", 1: "Energy", 2: "Theta", 3: "Phi", 4: "Scatter Angle", 5: "Path Length"})
+        # data = [self.lst[0], self.lst[1], self.lst[2], self.lst[3], self.lst[4], self.lst[5]]
+        # self.df = pd.DataFrame(data).T.rename(columns={0: "Event ID", 1: "Energy", 2: "Theta", 3: "Phi", 4: "Scatter Angle", 5: "Path Length"})
+        # print(self.df.head())
+        # print("Method 1", time.time() - self.start)
+
+        data = []
+        for i in range(len(self.lst[0])):
+            dataI = []
+            dataI.append(self.lst[0][i])
+            dataI.append(self.lst[1][i])
+            dataI.append(self.lst[2][i])
+            dataI.append(self.lst[3][i])
+            dataI.append(self.lst[4][i])
+            dataI.append(self.lst[5][i])
+            data.append(dataI)
+        self.df = pd.DataFrame(data).rename(columns={0: "Event ID", 1: "Energy", 2: "Theta", 3: "Phi", 4: "Scatter Angle", 5: "Path Length"})
         print(self.df.head())
-        print("Method 1", time.time() - self.start)
+        print("Method 2", time.time() - self.start)
+
  
     # def filesplit(self):
     #     df = pd.DataFrame(arr)
