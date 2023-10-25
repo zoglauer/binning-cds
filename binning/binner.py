@@ -10,7 +10,7 @@ class Binner():
             self.lst = pd.read_pickle(dataFile)
         else:
             self.lst = pd.read_csv(dataFile)
-        self.filesplit()
+        self.listSplit()
 
     def listSplit(self):
         print(self.lst[0][0])
