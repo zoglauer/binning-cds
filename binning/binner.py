@@ -13,7 +13,18 @@ class Binner():
         self.listSplit()
 
     def listSplit(self):
-        print(type(self.lst[0][0]))
+        print(type(self.lst[0][20]))
+        print(self.lst[0][20])
+        print(type(self.lst[1][20]))
+        print(self.lst[1][20])
+        print(type(self.lst[2][20]))
+        print(self.lst[2][20])
+        print(type(self.lst[3][20]))
+        print(self.lst[3][20])
+        print(type(self.lst[4][20]))
+        print(self.lst[4][20])
+        print(type(self.lst[5][20]))
+        print(self.lst[5][20])
         # print(self.lst.T.head())
  
     # def filesplit(self):
