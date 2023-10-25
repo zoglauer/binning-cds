@@ -14,7 +14,7 @@ class Binner():
             print("not")
             self.df = pd.read_csv(dataFile)
         print("done")
-        print(type(self.df))
+        print(self.df)
         # print(self.df.head(5))
         print("done2")
  
