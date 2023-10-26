@@ -6,6 +6,7 @@ import time
 
 class Binner():
     def __init__(self, dataFile):
+        # start times for runtime analysis
         self.start = time.time()
         ending = os.path.splitext(dataFile)[-1].lower()
         if ending == ".pkl":
@@ -17,6 +18,7 @@ class Binner():
     def listSplit(self):
         # data = [self.lst[0], self.lst[1], self.lst[2], self.lst[3], self.lst[4], self.lst[5]]
         # self.df = pd.DataFrame(data).T.rename(columns={0: "Event ID", 1: "Energy", 2: "Theta", 3: "Phi", 4: "Scatter Angle", 5: "Path Length"})
+        # RUNTIME TEST
         # print(self.df.head())
         # print("Method 1", time.time() - self.start)
 
@@ -31,97 +33,86 @@ class Binner():
             dataI.append(self.lst[5][i])
             data.append(dataI)
         self.df = pd.DataFrame(data, columns={0: "Event ID", 1: "Energy", 2: "Theta", 3: "Phi", 4: "Scatter Angle", 5: "Path Length"})
-        print(self.df.head())
-        print("Method 2", time.time() - self.start)
+        # RUNTIME TEST
+        # print(self.df.head())
+        # print("Method 2", time.time() - self.start)
 
         # for data set "/volumes/selene/users/andreas/simulationScript/Output/TestSource.926.inc1.id1.tra.gz.pkl",
-        # Method 1 took 71.73062920570374 seconds and Method 2 took 15.056302547454834
+        # Method 1 took 71.73062920570374 seconds and Method 2 took 15.090354919433594
     
-    # def binnertest(self, df,n,epsilon,colnames=['theta','phi','scatterangle']):
+    def binnertest(self, n, epsilon):
+        # df,n,epsilon,colnames=['theta','phi','scatterangle']
+        def unevenbins(self, colname, n, epsilon):
+            itemsPerBin = len(self.df) / n
+            # tolerance of 10 items diff
+            # start with even bin hypothetical
+            bins = {}
+            binslist = []
+            itemslist=[] # actual rows that are to be contained in these bins
+            if colname == 'Phi':
+                prev = -180
+            else:
+                prev = 0
+            binslist.append(prev)
 
-    #     def unevenbins(df, colname, n, epsilon):
-    #         itemsPerBin = len(df)/n
-    #         #tolerance of 10 items diff
-    #         # start with even bin hypothetical
-            
-    #         bins = {}
-    #         binslist = []
-    #         itemslist=[] #actual rows that are to be contained in these bins
-    #         if colname =='phi':
-    #             prev=-180
-    #         else:
-    #             prev = 0
-    #         binslist.append(prev)
-    #         for i in np.arange(n):
-    #             keepGoing = True
-    #         if colname =='theta' or colname =='scatterangle':
-    #             initialcurrSize = 180/n
-    #         elif colname=='phi':
-    #             initialcurrSize=360/n
-    #         iters = 0
-    #         currSize=initialcurrSize
-    #         fullname = {'theta':'Theta (Polar Angle)','phi': 'Phi (Azimuthal)','scatterangle':'Scatter Angle'}
-    #         while keepGoing: # bin width should start at 180/n, but starting point will be different as going across the bins.
-    #             actualItems= df[prev < df[fullname[colname]]][df[fullname[colname]] < (prev + currSize)]
-    #             thisbinItems = len(actualItems)
+            for i in range(n):
+                keepGoing = True
+                if colname == 'Theta' or colname == 'Scatter Angle':
+                    initialcurrSize = 180 / n
+                elif colname== 'Phi':
+                    initialcurrSize = 360 / n
+                iters = 0
+                currSize = initialcurrSize
+                while keepGoing: # bin width should start at 180 / n, but starting point will be different as going across the bins.
+                    actualItems= self.df[prev < self.df[colname]][self.df[colname] < (prev + currSize)]
+                    thisbinItems = len(actualItems)
                 
-    #             if np.abs(thisbinItems - itemsPerBin) <= epsilon or iters > 1000:
-    #                 keepGoing = False
-    #                 print(prev,prev+currSize)
-    #                 bins[f'{prev} to {prev + currSize}'] = thisbinItems
-    #                 itemslist.append(actualItems)
-    #                 prev = prev + currSize
-    #                 binslist.append(prev)
-    #                 currSize = initialcurrSize # resetting this
-    #             elif thisbinItems < itemsPerBin: # if too few items, make the bin bigger
-    #             #  if colname =='phi':
-    #             #   currSize=np.min([20/19*currSize, 360])
-    #             #   if currSize == 360:
-    #             #     bins[f'{prev} to {currSize}'] = len(df[prev < df[fullname[colname]]][df[fullname[colname]] < (currSize)])
-    #             #     binslist.append(currSize)
-    #             #     break
-    #             #  else:
-    #                 currSize = np.min([20/19*currSize, 180])
-    #                 if currSize == 180:
-    #                     bins[f'{prev} to {currSize}'] = len(df[prev < df[fullname[colname]]][df[fullname[colname]] < (currSize)])
-    #                     binslist.append(currSize)
-    #                     break
-                
-    #             else: # make bin smaller
-    #                 currSize = 19/20*currSize
-    #             iters = iters + 1
-    #         if 180 not in binslist:
-    #             prev = binslist[-1]
-    #             currSize=180
-    #             bins[f'{prev} to {currSize}'] = len(df[prev < df[fullname[colname]]][df[fullname[colname]] < (currSize)])
-    #             binslist.append(currSize)
-    #         return bins,binslist,itemslist
+                    if np.abs(thisbinItems - itemsPerBin) <= epsilon or iters > 1000:
+                        keepGoing = False
+                        print(prev, prev+currSize)
+                        bins[f'{prev} to {prev + currSize}'] = thisbinItems
+                        itemslist.append(actualItems)
+                        prev = prev + currSize
+                        binslist.append(prev)
+                        currSize = initialcurrSize # resetting this
+                    elif thisbinItems < itemsPerBin: # if too few items, make the bin bigger
+                        currSize = min([20/19 * currSize, 180])
+                        if currSize == 180:
+                            bins[f'{prev} to {currSize}'] = len(self.df[prev < self.df[colname]][self.df[colname] < (currSize)])
+                            binslist.append(currSize)
+                            break
+                    else: # make bin smaller
+                        currSize = 19 / 20 * currSize
+                    iters = iters + 1
+                if 180 not in binslist:
+                    prev = binslist[-1]
+                    currSize=180
+                    bins[f'{prev} to {currSize}'] = len(self.df[prev < self.df[colname]][self.df[colname] < (currSize)])
+                    binslist.append(currSize)
+                return bins,binslist,itemslist
 
-    #     def assigntodf(outputfromunevenbins,df,col):
-    #         maxangle=180
-    #         upperbounds=outputfromunevenbins[1]
-    #         points_in_group=outputfromunevenbins[2]
-    #         newlst = [None]*len(df) #pd.DataFrame({'a':[None]*len(df)})
-    #         for i in np.arange(len(points_in_group)):
-    #         #points_in_group[i][f'{col} bin']=upperbounds[i+1]
-    #             if i == len(points_in_group)-1: #last box
-    #                 bound=maxangle
-    #             else:
-    #                 bound= upperbounds[i+1]
-    #             for j in points_in_group[i].index:
-    #                 newlst[j]= bound
-    #         #newlst.iloc[points_in_group.index]['a']=upperbounds[i+1]
-    #         df[f'{col} bin'] = newlst
-    #         return df
-
-    #     thetabins= unevenbins(df, 'theta', n, epsilon)
-    #     phibins=unevenbins(df, 'phi', n, epsilon)
-    #     scbins=unevenbins(df, 'scatterangle', n, epsilon)
-    #     assigntodf(thetabins,df,'theta')
-    #     assigntodf(phibins,df,'phi')
-    #     assigntodf(scbins,df,'scatterangle')
-        
-    #     return df
+        def assigntodf(self, outputfromunevenbins, col):
+            maxangle = 180
+            upperbounds = outputfromunevenbins[1]
+            points_in_group = outputfromunevenbins[2]
+            newlst = [None]*len(self.df)
+            for i in range(len(points_in_group)):
+                if i == len(points_in_group) - 1: # last box
+                    bound = maxangle
+                else:
+                    bound= upperbounds[i + 1]
+                for j in points_in_group[i].index:
+                    newlst[j] = bound
+            self.df[f'{col} bin'] = newlst
+            return self.df
+        thetabins = unevenbins(self.df, 'theta', n, epsilon)
+        phibins = unevenbins(self.df, 'phi', n, epsilon)
+        scbins = unevenbins(self.df, 'scatterangle', n, epsilon)
+        assigntodf(thetabins, self.df,'theta')
+        assigntodf(phibins, self.df,'phi')
+        assigntodf(scbins, self.df,'scatterangle')
+        print("Runtime (from initialization of Binner object):", time.time() - self.start, "seconds")
+        return self.df
 
     # def plot2d(self, param):
     # def plot3d(self):
