@@ -66,7 +66,11 @@ class Binner():
                 while keepGoing: # bin width should start at 180/n, but starting point will be different as going across the bins.
                     actualItems= df[prev < df[fullname[colname]]][df[fullname[colname]] < (prev + currSize)]
                     thisbinItems = len(actualItems)
-                
+
+                    x = (time.time() - self.start) // 1
+                    if x % 20 == 0:
+                        print("Still going, time elapsed:", x, "seconds")
+
                     if np.abs(thisbinItems - itemsPerBin) <= epsilon or iters > 1000:
                         keepGoing = False
                         print(prev, prev + currSize)
