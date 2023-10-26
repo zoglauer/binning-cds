@@ -40,67 +40,6 @@ class Binner():
         # for data set "/volumes/selene/users/andreas/simulationScript/Output/TestSource.926.inc1.id1.tra.gz.pkl",
         # Method 1 took 71.73062920570374 seconds and Method 2 took 15.090354919433594
     
-import os
-import pandas as pd
-import numpy as np
-import pickle
-
-class Binner():
-    def __init__(self):
-        self.x = 0
-        # ending = os.path.splitext(dataFile)[-1].lower()
-        # print(dataFile)
-        # if ending == ".pkl":
-        #     self.df = pd.read_pickle(dataFile)
-        # else:
-        #     self.df = pd.read_csv(dataFile)
-    # def bin(binStyle):
-        # test different binning methods - papers (+ references like qubo), ML based - train on simulation data, train with cone, physics based, occupancy based
-    # def binID(self, phi, chi, psi):
-    # def binValue(self, binID):
-    # def binValue(self, phi, chi, psi):
- 
-    def filesplit(self, filepath = "/volumes/selene/users/andreas/simulationScript/Output/TestSource.926.inc1.id1.tra.gz.pkl"):
-        fil = open(filepath, "rb")
-        # unpickled = pickle.load(fil)
-        
-        stuff = pickle.load(fil)
-        arr = np.array(stuff)
-        fil.close()
-        
-        
-        df = pd.DataFrame(arr)
-        df.rename(
-            columns = {1: "Energy", 2: "Theta (Polar Angle)", 3: "Phi (Azimuthal)", 4: "Scatter Angle", 5: "Path Length (cm)"},
-            inplace = True,
-        )
-        
-        #datafile = open("./unpickler_output.txt", "r")
-        data_all_strings = str(stuff)
-        data_somewhat_list = data_all_strings.replace('\n', '').split(']')
-        def parsenum(i):
-            try:
-                n = float(i)
-            except:
-                n = float("NaN")
-        
-            return n
-        
-        data = {}
-        for i in np.arange(6):
-            lst =  data_somewhat_list[i].split(',')
-            lst[0] = lst[0].replace('[', '')
-            lst = tuple(map(parsenum, lst))
-            data[i] =  lst
-        
-        del data[0] # length is off by 1 and column is not entirely relevant
-        df = pd.DataFrame(data)
-        df.rename(
-            columns = {1: "Energy", 2: "Theta (Polar Angle)", 3: "Phi (Azimuthal)", 4: "Scatter Angle", 5: "Path Length (cm)"},
-            inplace = True,
-            )
-        return df
-    
     def binnertest(self, df, n, epsilon, colnames=['theta','phi','scatterangle']):
         def unevenbins(df, colname, n, epsilon):
             itemsPerBin = len(df) / n
@@ -176,9 +115,6 @@ class Binner():
         assigntodf(scbins, df, 'scatterangle')
         
         return df
-
-    # def plot2d(self, param):
-    # def plot3d(self):
 
     # def plot2d(self, param):
     # def plot3d(self):
