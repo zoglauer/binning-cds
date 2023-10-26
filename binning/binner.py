@@ -6,7 +6,7 @@ import time
 
 class Binner():
     def __init__(self, dataFile):
-        self.start = time.time()
+        # self.start = time.time()
         ending = os.path.splitext(dataFile)[-1].lower()
         if ending == ".pkl":
             self.lst = pd.read_pickle(dataFile)
@@ -30,43 +30,12 @@ class Binner():
             dataI.append(self.lst[4][i])
             dataI.append(self.lst[5][i])
             data.append(dataI)
-        self.df = pd.DataFrame(data).rename(columns={0: "Event ID", 1: "Energy", 2: "Theta", 3: "Phi", 4: "Scatter Angle", 5: "Path Length"})
+        self.df = pd.DataFrame(data, columns={0: "Event ID", 1: "Energy", 2: "Theta", 3: "Phi", 4: "Scatter Angle", 5: "Path Length"})
         print(self.df.head())
         print("Method 2", time.time() - self.start)
 
- 
-    # def filesplit(self):
-    #     df = pd.DataFrame(arr)
-    #     df.rename(
-    #         columns = {1: "Energy", 2: "Theta (Polar Angle)", 3: "Phi (Azimuthal)", 4: "Scatter Angle", 5: "Path Length (cm)"},
-    #         inplace = True,
-    #     )
-        
-    #     #datafile = open("./unpickler_output.txt", "r")
-    #     data_all_strings = str(stuff)
-    #     data_somewhat_list = data_all_strings.replace('\n', '').split(']')
-    #     def parsenum(i):
-    #         try:
-    #             n = float(i)
-    #         except:
-    #             n = float("NaN")
-        
-    #         return n
-        
-    #     data = {}
-    #     for i in np.arange(6):
-    #         lst =  data_somewhat_list[i].split(',')
-    #         lst[0] = lst[0].replace('[', '')
-    #         lst = tuple(map(parsenum, lst))
-    #         data[i] =  lst
-        
-    #     del data[0] # length is off by 1 and column is not entirely relevant
-    #     df = pd.DataFrame(data)
-    #     df.rename(
-    #         columns = {1: "Energy", 2: "Theta (Polar Angle)", 3: "Phi (Azimuthal)", 4: "Scatter Angle", 5: "Path Length (cm)"},
-    #         inplace = True,
-    #         )
-    #     return df
+        # for data set "/volumes/selene/users/andreas/simulationScript/Output/TestSource.926.inc1.id1.tra.gz.pkl",
+        # Method 1 took 71.73062920570374 seconds and Method 2 took 15.056302547454834
     
     # def binnertest(self, df,n,epsilon,colnames=['theta','phi','scatterangle']):
 
