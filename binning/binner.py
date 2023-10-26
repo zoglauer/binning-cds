@@ -6,7 +6,7 @@ import time
 
 class Binner():
     def __init__(self, dataFile):
-        # self.start = time.time()
+        self.start = time.time()
         ending = os.path.splitext(dataFile)[-1].lower()
         if ending == ".pkl":
             self.lst = pd.read_pickle(dataFile)
