@@ -25,14 +25,15 @@ class Binner():
         data = []
         for i in range(len(self.lst[0])):
             dataI = []
-            dataI.append(self.lst[0][i])
+            # dataI.append(self.lst[0][i])
             dataI.append(self.lst[1][i])
             dataI.append(self.lst[2][i])
             dataI.append(self.lst[3][i])
             dataI.append(self.lst[4][i])
             dataI.append(self.lst[5][i])
             data.append(dataI)
-        self.df = pd.DataFrame(data, columns={0: "Event ID", 1: "Energy", 2: "Theta", 3: "Phi", 4: "Scatter Angle", 5: "Path Length"})
+        # self.df = pd.DataFrame(data, columns={0: "Event ID", 1: "Energy", 2: "Theta", 3: "Phi", 4: "Scatter Angle", 5: "Path Length"})
+        self.df = pd.DataFrame(data, columns={0: "Energy", 1: "Theta (Polar Angle)", 2: "Phi (Azimuthal)", 3: "Scatter Angle", 4: "Path Length (cm)"})
         # RUNTIME TEST
         # print(self.df.head())
         # print("Method 2", time.time() - self.start)
