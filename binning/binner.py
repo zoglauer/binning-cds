@@ -3,7 +3,6 @@ import pandas as pd
 import numpy as np
 import pickle
 import time
-
 class Binner():
     def __init__(self, dataFile):
         # start times for runtime analysis
@@ -25,7 +24,7 @@ class Binner():
         data = []
         for i in range(len(self.lst[0])):
             dataI = []
-            # dataI.append(self.lst[0][i])
+            dataI.append(self.lst[0][i])
             dataI.append(self.lst[1][i])
             dataI.append(self.lst[2][i])
             dataI.append(self.lst[3][i])
@@ -34,12 +33,12 @@ class Binner():
             data.append(dataI)
         self.df = pd.DataFrame(data, columns={0: "Event ID", 1: "Energy", 2: "Theta (Polar Angle (Azimuthal)", 4: "Scatter Angle", 5: "Path Length (cm)"})
         # RUNTIME TEST
-        # print(self.df.head())
-        # print("Method 2", time.time() - self.start)
+        print(self.df.head())
+        print("Method 2", time.time() - self.start)
 
         # for data set "/volumes/selene/users/andreas/simulationScript/Output/TestSource.926.inc1.id1.tra.gz.pkl",
         # Method 1 took 71.73062920570374 seconds and Method 2 took 15.090354919433594
-    
+
     def binnertest(self, df, n, epsilon, colnames=['theta','phi','scatterangle']):
         def unevenbins(df, colname, n, epsilon):
             itemsPerBin = len(df) / n
@@ -68,7 +67,7 @@ class Binner():
                     thisbinItems = len(actualItems)
 
                     x = (time.time() - self.start) // 1
-                    if x % 20 == 0:
+                    if x % 10 == 0:
                         print("Still going, time elapsed:", x, "seconds")
 
                     if np.abs(thisbinItems - itemsPerBin) <= epsilon or iters > 1000:

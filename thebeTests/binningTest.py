@@ -12,8 +12,8 @@ from binner import Binner
 
 filepath = "/volumes/selene/users/andreas/simulationScript/Output/TestSource.926.inc1.id1.tra.gz.pkl"
 binny = Binner(filepath)
-x = binny.binnertest(binny.df, 20, 20)
-print(x.head())
+# x = binny.binnertest(binny.df, 20, 20)
+# print(x.head())
 
 # x = binny.filesplit()
 # y = binnertest(x, 20, 20, colnames=['theta','phi','scatterangle'])
