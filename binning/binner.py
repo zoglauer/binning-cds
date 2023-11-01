@@ -31,7 +31,7 @@ class Binner():
             dataI.append(self.lst[4][i])
             dataI.append(self.lst[5][i])
             data.append(dataI)
-        self.df = pd.DataFrame(data, columns={0: "Event ID", 1: "Energy", 2: "Theta (Polar Angle (Azimuthal)", 4: "Scatter Angle", 5: "Path Length (cm)"})
+        self.df = pd.DataFrame(data, columns={0: "Event ID", 1: "Energy", 2: "Theta", 3: "Phi", 4: "Scatter Angle", 5: "Path Length (cm)"})
         # RUNTIME TEST
         print(self.df.head())
         print("Method 2", time.time() - self.start)
