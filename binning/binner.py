@@ -45,6 +45,7 @@ class Binner():
     def bin(self, n=20, column="Theta"):
         x = time.time()
         self.bins[f"{column} {n}"] = []
+        print(self.df.head(30))
         currDf = self.df.sort_values(by=column).reset_index(drop=False)
         l = len(currDf) / 2
         print(currDf.loc[[l - 10]])
