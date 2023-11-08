@@ -46,6 +46,28 @@ class Binner():
         x = time.time()
         self.bins[f"{column} {n}"] = []
         currDf = self.df.sort_values(by=column).reset_index(drop=False)
+        l = len(currDf) / 2
+        print(currDf.loc[[l - 10]])
+        print(currDf.loc[[l - 9]])
+        print(currDf.loc[[l - 8]])
+        print(currDf.loc[[l - 7]])
+        print(currDf.loc[[l - 6]])
+        print(currDf.loc[[l - 5]])
+        print(currDf.loc[[l - 4]])
+        print(currDf.loc[[l - 3]])
+        print(currDf.loc[[l - 2]])
+        print(currDf.loc[[l - 1]])
+        print(currDf.loc[[l]])
+        print(currDf.loc[[l + 1]])
+        print(currDf.loc[[l + 2]])
+        print(currDf.loc[[l + 3]])
+        print(currDf.loc[[l + 4]])
+        print(currDf.loc[[l + 5]])
+        print(currDf.loc[[l + 6]])
+        print(currDf.loc[[l + 7]])
+        print(currDf.loc[[l + 8]])
+        print(currDf.loc[[l + 9]])
+        print(currDf.loc[[l + 10]])
         # print(currDf.head())
         # account for rebinning if values are the same
         binSize = len(currDf) // n
