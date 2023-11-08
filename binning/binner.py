@@ -3,10 +3,11 @@ import pandas as pd
 import numpy as np
 import pickle
 import time
+from point import Point
 class Binner():
     def __init__(self, dataFile):
         # start times for runtime analysis
-        # self.start = time.time()
+        self.start = time.time()
         self.bins = {}
         ending = os.path.splitext(dataFile)[-1].lower()
         if ending == ".pkl":
@@ -34,18 +35,43 @@ class Binner():
             data.append(dataI)
         self.df = pd.DataFrame(data, columns=["Event ID", "Energy", "Theta", "Phi", "Scatter Angle", "Path Length (cm)"])
         # RUNTIME TEST
-        # print(self.df.head())
-        # print("Method 2", time.time() - self.start)
+        print(self.df.head())
+        print("Method 2", time.time() - self.start)
 
         # for data set "/volumes/selene/users/andreas/simulationScript/Output/TestSource.926.inc1.id1.tra.gz.pkl",
         # Method 1 took 71.73062920570374 seconds and Method 2 took 15.090354919433594
     
-    def bin(self, n, column="Theta"):
-        x = time.time()
-        print(self.df.head(10))
-        self.df = self.df.sort_values(by=column)
-        print(self.df.head(10))
-        print("Runtime", time.time() - x)
+    def bin(self, n=20, column="Theta"):
+        self.bins[f"{column} {n}"] = []
+        currDf = self.df.sort_values(by=column).reset_index(drop=False)
+        print(currDf.head())
+        # account for rebinning if values are the same
+        binSize = len(currDf) // n
+        overflow = len(currDf) -  n * binSize
+        prev = 0
+        curr = 0
+        i = 0
+        for i in range(n):
+            if i < overflow:
+                x = binSize + 1
+            else:
+                x = binSize
+            curr = prev + x
+            # METHOD 1
+            self.bins[f"{column} {n}"].append(list(currDf.index[prev:curr]))
+            # # METHOD 2
+            # self.bins[f"Theta {n}"].append(list(currDf.index[prev:curr]))
+            
+
+    def showBins(self, n=20, column="Theta"):
+        theBin = self.bins[f"{column} {n}"]
+        for i in range(n):
+            stri = "["
+            stri += str(self.df[column][theBin[i][0]])
+            stri += ", "
+            stri += str(self.df[column][theBin[i][-1]])
+            stri += "]"
+            print(stri)
 
     # def binTrial(self, n, col="Scatter Angle"):
     #     self.mergeSort(col)
