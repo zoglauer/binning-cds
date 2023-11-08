@@ -43,7 +43,7 @@ class Binner():
         # Method 1 took 71.73062920570374 seconds and Method 2 took 15.090354919433594
     
     def bin(self, n=20, column="Theta"):
-        x = time.time()
+        # x = time.time()
         self.bins[f"{column} {n}"] = []
         currDf = self.df.sort_values(by=column).reset_index(drop=False)
         # account for rebinning if values are the same
@@ -60,11 +60,11 @@ class Binner():
             curr = prev + x
             self.bins[f"{column} {n}"].append(currDf[prev:curr])
             prev = curr
-        print("Bin Runtime:", time.time() - x)
+        # print("Bin Runtime:", time.time() - x)
     
     def binSecondDegree(self, n=20, column="Phi", n0=20, column0="Theta"):
         ogBin = self.bins[f"{column0} {n0}"]
-        
+
         
 
     def showBins(self, n=20, column="Theta"):
