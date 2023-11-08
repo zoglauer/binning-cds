@@ -43,6 +43,7 @@ class Binner():
         # Method 1 took 71.73062920570374 seconds and Method 2 took 15.090354919433594
     
     def bin(self, n=20, column="Theta"):
+        x = time.time()
         self.bins[f"{column} {n}"] = []
         currDf = self.df.sort_values(by=column).reset_index(drop=False)
         # print(currDf.head())
@@ -60,9 +61,11 @@ class Binner():
             curr = prev + x
             self.bins[f"{column} {n}"].append(currDf[prev:curr])
             prev = curr
+        print("Bin Runtime:", time.time() - x)
             
 
     def showBins(self, n=20, column="Theta"):
+        x = time.time()
         theBin = self.bins[f"{column} {n}"]
         for x in theBin:
             stri = "["
@@ -71,6 +74,7 @@ class Binner():
             stri += str(list(x["Theta"])[-1])
             stri += "]"
             print(stri)
+        print("Show Bins Runtime:", time.time() - x)
 
     # def binTrial(self, n, col="Scatter Angle"):
     #     self.mergeSort(col)
