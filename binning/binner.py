@@ -68,17 +68,16 @@ class Binner():
         
 
     def showBins(self, n=20, column="Theta"):
-        x = time.time()
+        t = time.time()
         theBin = self.bins[f"{column} {n}"]
         for x in theBin:
-            # stri = "["
-            # stri += str(list(x["Theta"])[0])
-            # stri += ", "
-            # stri += str(list(x["Theta"])[-1])
-            # stri += "]"
-            # print(stri)
-            y = 0
-        print("Show Bins Runtime:", (time.time() - x) / 1000000)
+            stri = "["
+            stri += str(list(x["Theta"])[0])
+            stri += ", "
+            stri += str(list(x["Theta"])[-1])
+            stri += "]"
+            print(stri)
+        print("Show Bins Runtime:", time.time() - t)
 
     # def binTrial(self, n, col="Scatter Angle"):
     #     self.mergeSort(col)
