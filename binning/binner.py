@@ -76,7 +76,7 @@ class Binner():
             stri += ", "
             stri += str(list(x["Theta"])[-1])
             stri += "]"
-            print(stri)
+            # print(stri)
         print("Show Bins Runtime:", time.time() - x)
 
     # def binTrial(self, n, col="Scatter Angle"):
