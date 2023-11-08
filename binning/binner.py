@@ -7,7 +7,7 @@ from point import Point
 class Binner():
     def __init__(self, dataFile):
         # start times for runtime analysis
-        self.start = time.time()
+        # self.start = time.time()
         self.bins = {}
         ending = os.path.splitext(dataFile)[-1].lower()
         if ending == ".pkl":
@@ -25,6 +25,7 @@ class Binner():
 
         data = []
         for i in range(len(self.lst[0])):
+            # data.append(Point(self.lst[0][i], self.lst[1][i], self.lst[2][i], self.lst[3][i], self.lst[4][i], self.lst[5][i]))
             dataI = []
             dataI.append(self.lst[0][i])
             dataI.append(self.lst[1][i])
@@ -34,9 +35,9 @@ class Binner():
             dataI.append(self.lst[5][i])
             data.append(dataI)
         self.df = pd.DataFrame(data, columns=["Event ID", "Energy", "Theta", "Phi", "Scatter Angle", "Path Length (cm)"])
-        # RUNTIME TEST
-        print(self.df.head())
-        print("Method 2", time.time() - self.start)
+        # # RUNTIME TEST
+        # print(self.df.head())
+        # print("Method 2", time.time() - self.start)
 
         # for data set "/volumes/selene/users/andreas/simulationScript/Output/TestSource.926.inc1.id1.tra.gz.pkl",
         # Method 1 took 71.73062920570374 seconds and Method 2 took 15.090354919433594
@@ -44,7 +45,7 @@ class Binner():
     def bin(self, n=20, column="Theta"):
         self.bins[f"{column} {n}"] = []
         currDf = self.df.sort_values(by=column).reset_index(drop=False)
-        print(currDf.head())
+        # print(currDf.head())
         # account for rebinning if values are the same
         binSize = len(currDf) // n
         overflow = len(currDf) -  n * binSize
@@ -57,19 +58,17 @@ class Binner():
             else:
                 x = binSize
             curr = prev + x
-            # METHOD 1
-            self.bins[f"{column} {n}"].append(list(currDf.index[prev:curr]))
-            # # METHOD 2
-            # self.bins[f"Theta {n}"].append(list(currDf.index[prev:curr]))
+            self.bins[f"{column} {n}"].append(currDf[prev:curr])
+            prev = curr
             
 
     def showBins(self, n=20, column="Theta"):
         theBin = self.bins[f"{column} {n}"]
-        for i in range(n):
+        for x in theBin:
             stri = "["
-            stri += str(self.df[column][theBin[i][0]])
+            stri += str(list(x["Theta"])[0])
             stri += ", "
-            stri += str(self.df[column][theBin[i][-1]])
+            stri += str(list(x["Theta"])[-1])
             stri += "]"
             print(stri)
 
