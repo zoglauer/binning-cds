@@ -45,31 +45,7 @@ class Binner():
     def bin(self, n=20, column="Theta"):
         x = time.time()
         self.bins[f"{column} {n}"] = []
-        print(self.df.head(30))
         currDf = self.df.sort_values(by=column).reset_index(drop=False)
-        l = len(currDf) / 2
-        print(currDf.loc[[l - 10]])
-        print(currDf.loc[[l - 9]])
-        print(currDf.loc[[l - 8]])
-        print(currDf.loc[[l - 7]])
-        print(currDf.loc[[l - 6]])
-        print(currDf.loc[[l - 5]])
-        print(currDf.loc[[l - 4]])
-        print(currDf.loc[[l - 3]])
-        print(currDf.loc[[l - 2]])
-        print(currDf.loc[[l - 1]])
-        print(currDf.loc[[l]])
-        print(currDf.loc[[l + 1]])
-        print(currDf.loc[[l + 2]])
-        print(currDf.loc[[l + 3]])
-        print(currDf.loc[[l + 4]])
-        print(currDf.loc[[l + 5]])
-        print(currDf.loc[[l + 6]])
-        print(currDf.loc[[l + 7]])
-        print(currDf.loc[[l + 8]])
-        print(currDf.loc[[l + 9]])
-        print(currDf.loc[[l + 10]])
-        # print(currDf.head())
         # account for rebinning if values are the same
         binSize = len(currDf) // n
         overflow = len(currDf) -  n * binSize
@@ -85,7 +61,11 @@ class Binner():
             self.bins[f"{column} {n}"].append(currDf[prev:curr])
             prev = curr
         print("Bin Runtime:", time.time() - x)
-            
+    
+    def binSecondDegree(self, n=20, column="Phi", n0=20, column0="Theta"):
+        ogBin = self.bins[f"{column0} {n0}"]
+        
+        
 
     def showBins(self, n=20, column="Theta"):
         x = time.time()
