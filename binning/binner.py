@@ -71,12 +71,13 @@ class Binner():
         x = time.time()
         theBin = self.bins[f"{column} {n}"]
         for x in theBin:
-            stri = "["
-            stri += str(list(x["Theta"])[0])
-            stri += ", "
-            stri += str(list(x["Theta"])[-1])
-            stri += "]"
+            # stri = "["
+            # stri += str(list(x["Theta"])[0])
+            # stri += ", "
+            # stri += str(list(x["Theta"])[-1])
+            # stri += "]"
             # print(stri)
+            y = 0
         print("Show Bins Runtime:", (time.time() - x) / 1000000)
 
     # def binTrial(self, n, col="Scatter Angle"):
