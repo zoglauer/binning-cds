@@ -62,22 +62,25 @@ class Binner():
             prev = curr
         # print("Bin Runtime:", time.time() - x)
     
-    def binSecondDegree(self, n=20, column="Phi", n0=20, column0="Theta"):
-        ogBin = self.bins[f"{column0} {n0}"]
+    def getBinBounds(self, n=20, column="Theta"):
+        theBin = self.bins[f"{column} {n}"]
+        lst = []
+        for x in theBin:
+            lst.append([list(x[column])[0], list(x[column])[-1]])
+        print(lst)
+        return lst
 
-        
-
-    def showBins(self, n=20, column="Theta"):
-        t = time.time()
+    def printBins(self, n=20, column="Theta"):
+        # t = time.time()
         theBin = self.bins[f"{column} {n}"]
         for x in theBin:
             stri = "["
-            stri += str(list(x["Theta"])[0])
+            stri += str(list(x[column])[0])
             stri += ", "
-            stri += str(list(x["Theta"])[-1])
+            stri += str(list(x[column])[-1])
             stri += "]"
             print(stri)
-        print("Show Bins Runtime:", time.time() - t)
+        # print("Show Bins Runtime:", time.time() - t)
 
     # def binTrial(self, n, col="Scatter Angle"):
     #     self.mergeSort(col)
