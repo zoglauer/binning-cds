@@ -11,4 +11,5 @@ filepath = "/volumes/selene/users/andreas/simulationScript/Output/TestSource.926
 binny = Binner(filepath)
 # binny.bin()
 # binny.getBinBounds()
+binny.bin3D()
 binny.printBins()
