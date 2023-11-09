@@ -77,6 +77,7 @@ class Binner():
         return lst
 
     def bin3D(self, n=[20, 20, 20], columns=["Theta", "Phi", "Scatter Angle"]):
+        DF = self.df
         x = time.time()
         self.bin(n[0], columns[0])
         self.bin(n[1], columns[1])
@@ -87,20 +88,20 @@ class Binner():
         columnA = []
         columnB = []
         columnC = []
-        for i in range(len(self.df)):
-            a = self.df[columns[0]][i]
-            a1 = list(bb1 < a).index(True)
+        for i in range(len(DF)):
+            a = DF[columns[0]][i]
+            a1 = list(bb1 < a).index(False)
             columnA.append(bb1.item(a1))
-            b = self.df[columns[1]][i]
-            b1 = list(bb2 < b).index(True)
+            b = DF[columns[1]][i]
+            b1 = list(bb2 < b).index(False)
             columnB.append(bb2.item(b1))
-            c = self.df[columns[2]][i]
-            c1 = list(bb3 < c).index(True)
+            c = DF[columns[2]][i]
+            c1 = list(bb3 < c).index(False)
             columnC.append(bb3.item(c1))
-        self.df[f"{columns[0]} Bin"] = columnA
-        self.df[f"{columns[1]} Bin"] = columnB
-        self.df[f"{columns[2]} Bin"] = columnC
-        print(self.df.head(10))
+        DF[f"{columns[0]} Bin"] = columnA
+        DF[f"{columns[1]} Bin"] = columnB
+        DF[f"{columns[2]} Bin"] = columnC
+        print(DF.head(300))
         print("Runtime: ", time.time() - x)
         # method 1 numpy array: 
         # method 2 search: 
