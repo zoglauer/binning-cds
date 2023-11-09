@@ -68,16 +68,42 @@ class Binner():
         for x in theBin:
             lst.append([list(x[column])[0], list(x[column])[-1]])
         return lst
+    
+    def getBinUpperBounds(self, n=20, column="Theta"):
+        theBin = self.bins[f"{column} {n}"]
+        lst = []
+        for x in theBin:
+            lst.append(list(x[column])[-1])
+        return lst
 
     def bin3D(self, n=[20, 20, 20], columns=["Theta", "Phi", "Scatter Angle"]):
+        x = time.time()
         self.bin(n[0], columns[0])
         self.bin(n[1], columns[1])
         self.bin(n[2], columns[2])
-        bb1 = self.getBinBounds(n[0], columns[0])
-        bb2 = self.getBinBounds(n[1], columns[1])
-        bb3 = self.getBinBounds(n[2], columns[2])
-
-        
+        bb1 = np.array(self.getBinUpperBounds(n[0], columns[0]))
+        bb2 = np.array(self.getBinUpperBounds(n[1], columns[1]))
+        bb3 = np.array(self.getBinUpperBounds(n[2], columns[2]))
+        columnA = []
+        columnB = []
+        columnC = []
+        for i in range(len(self.df)):
+            a = self.df[columns[0]][i]
+            a1 = list(bb1 < a).index(True)
+            columnA.append(bb1.item(a1))
+            b = self.df[columns[1]][i]
+            b1 = list(bb2 < b).index(True)
+            columnB.append(bb2.item(b1))
+            c = self.df[columns[2]][i]
+            c1 = list(bb3 < c).index(True)
+            columnC.append(bb3.item(c1))
+        self.df[f"{columns[0]} Bin"] = columnA
+        self.df[f"{columns[1]} Bin"] = columnB
+        self.df[f"{columns[2]} Bin"] = columnC
+        print(self.df.head(10))
+        print("Runtime: ", time.time() - x)
+        # method 1 numpy array: 
+        # method 2 search: 
 
     def printBins(self, n=20, column="Theta"):
         lst = self.getBinBounds(n, column)
