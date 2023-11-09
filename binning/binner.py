@@ -67,20 +67,22 @@ class Binner():
         lst = []
         for x in theBin:
             lst.append([list(x[column])[0], list(x[column])[-1]])
-        print(lst)
         return lst
 
+    def bin3D(self, n=[20, 20, 20], columns=["Theta", "Phi", "Scatter Angle"]):
+        self.bin(n[0], columns[0])
+        self.bin(n[1], columns[1])
+        self.bin(n[2], columns[2])
+        bb1 = self.getBinBounds(n[0], columns[0])
+        bb2 = self.getBinBounds(n[1], columns[1])
+        bb3 = self.getBinBounds(n[2], columns[2])
+
+        
+
     def printBins(self, n=20, column="Theta"):
-        # t = time.time()
-        theBin = self.bins[f"{column} {n}"]
-        for x in theBin:
-            stri = "["
-            stri += str(list(x[column])[0])
-            stri += ", "
-            stri += str(list(x[column])[-1])
-            stri += "]"
-            print(stri)
-        # print("Show Bins Runtime:", time.time() - t)
+        lst = self.getBinBounds(n, column)
+        for x in lst:
+            print(x)
 
     # def binTrial(self, n, col="Scatter Angle"):
     #     self.mergeSort(col)
