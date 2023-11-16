@@ -2,6 +2,7 @@ import sys
 import os
 import pandas as pd
 import pickle
+import psutil
 
 sys.path.append(os.path.join(os.path.dirname(sys.path[0]),"binning"))
 from binner import Binner
@@ -12,6 +13,7 @@ binny = Binner(filepath)
 # binny.bin()
 # binny.getBinBounds()
 binny.bin3D()
+print(psutil.Process(os.getpid()).memory_info().rss / 1024 ** 2)
 # print("Theta Bins")
 # binny.printBins(20, "Theta")
 # print()
