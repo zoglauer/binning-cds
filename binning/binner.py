@@ -25,6 +25,8 @@ class Binner():
 
         data = []
         for i in range(len(self.lst[0])):
+            if (self.lst[1][i] < 507 or self.lst[1][i] > 515):
+                continue
             # data.append(Point(self.lst[0][i], self.lst[1][i], self.lst[2][i], self.lst[3][i], self.lst[4][i], self.lst[5][i]))
             dataI = []
             dataI.append(self.lst[0][i])
@@ -36,7 +38,7 @@ class Binner():
             data.append(dataI)
         self.df = pd.DataFrame(data, columns=["Event ID", "Energy", "Theta", "Phi", "Scatter Angle", "Path Length (cm)"])
         # # RUNTIME TEST
-        # print(self.df.head())
+        # print(self.df.head(10))
         # print("Method 2", time.time() - self.start)
 
         # for data set "/volumes/selene/users/andreas/simulationScript/Output/TestSource.926.inc1.id1.tra.gz.pkl",
