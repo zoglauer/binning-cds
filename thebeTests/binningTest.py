@@ -12,8 +12,10 @@ filepath = "/volumes/selene/users/andreas/simulationScript/Output/TestSource.999
 binny = Binner(filepath)
 # binny.bin()
 # binny.getBinBounds()
-binny.bin3D()
+upperbins = binny.bin3D()
+
 print(psutil.Process(os.getpid()).memory_info().rss / 1024 ** 2, "MiB")
+upperbins
 # print("Theta Bins")
 # binny.printBins(20, "Theta")
 # print()
