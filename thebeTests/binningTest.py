@@ -9,20 +9,16 @@ from binner import Binner
 
 filepath = "/volumes/selene/users/andreas/simulationScript/Output/TestSource.999.inc1.id1.tra.gz.pkl"
 # filepath = "/volumes/selene/users/joseph/simulationScript/simulationResults/FlatContinuumIsotropic.inc381.id1.tra.gz.pkl"
-def f():
-    binny = Binner(filepath)
-    # binny.bin()
-    # binny.getBinBounds()
-    upperbins = binny.bin3D()
 
-    print(psutil.Process(os.getpid()).memory_info().rss / 1024 ** 2, "MiB")
-    return upperbins
+binny = Binner(filepath)
+# binny.bin()
+# binny.getBinBounds()
+upperbins = binny.bin3D()
 
-f()
+print(psutil.Process(os.getpid()).memory_info().rss / 1024 ** 2, "MiB")
 
-with open('bin_csv', 'r') as csv_file:
-    csv_reader = csv.reader(csv_file)
-    data = list(csv_reader)
+
+
 # print("Theta Bins")
 # binny.printBins(20, "Theta")
 # print()
