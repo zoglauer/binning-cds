@@ -15,8 +15,8 @@ binny = Binner(filepath)
 # binny.getBinBounds()
 upperbins = binny.bin3D()
 
-print(psutil.Process(os.getpid()).memory_info().rss / 1024 ** 2, "MiB")
-
+#print(psutil.Process(os.getpid()).memory_info().rss / 1024 ** 2, "MiB")
+print(upperbins)
 
 
 # print("Theta Bins")
