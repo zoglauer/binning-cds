@@ -19,6 +19,10 @@ def f():
     return upperbins
 
 f()
+
+with open('bin_csv', 'r') as csv_file:
+    csv_reader = csv.reader(csv_file)
+    data = list(csv_reader)
 # print("Theta Bins")
 # binny.printBins(20, "Theta")
 # print()
