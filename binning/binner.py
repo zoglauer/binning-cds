@@ -105,7 +105,7 @@ class Binner():
         DF[f"{columns[2]} Bin"] = columnC
         #print(DF.head(300))
         #print("Runtime: ", time.time() - x)
-        return DF.to_csv()
+        return DF.to_csv('bin_csv')
         # method 1 numpy array: 
         # method 2 search: 
 
