@@ -104,7 +104,7 @@ class Binner():
         DF[f"{columns[1]} Bin"] = columnB
         DF[f"{columns[2]} Bin"] = columnC
         print(DF.head(300))
-        print("Runtime: ", time.time() - x)
+        print("Binning Runtime: ", time.time() - x, " seconds")
         # method 1 numpy array: 
         # method 2 search: 
 
